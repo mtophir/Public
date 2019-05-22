@@ -1,0 +1,22 @@
+While loop with timer
+
+#! /bin/bash
+end=$((SECONDS+3))
+
+while [ $SECONDS -lt $end ]; do
+    # Do something...
+    :
+done
+____________________________________________
+Loop through an array and action on each
+
+## declare an array variable
+declare -a arr=("element1" "element2" "element3")
+
+## now loop through the above array
+for i in "${arr[@]}"
+do
+   # action on each individual element of the array
+done
+
+# You can access them using echo "${arr[0]}", "${arr[1]}"
