@@ -20,3 +20,117 @@ do
 done
 
 # You can access them using echo "${arr[0]}", "${arr[1]}"
+____________________________________________
+Find and replace 
+
+cd /path/to/your/folder
+sed -i 's/foo/bar/g' *
+
+find ./ -type f -exec sed -i 's/string1/string2/g' {} \;
+case insensitive
+find ./ -type f -exec sed -i 's/string1/string2/gI' {} \;
+
+Recursive
+grep -rl 'windows' ./ | xargs sed -i 's/windows/linux/g'
+
+find ./ -type f -exec sed -i 's/CURRENT/current/g' {} \;
+while IFS=$'\n' read line
+do  
+    if [[ "$line" =~ \#.* ]];then
+        logDebug "comment line:$line"
+    else
+        logDebug "normal line:$line"
+    fi
+done < myFile
+____________________________________________
+Global rename files
+
+for A in *.sh; do B=$(echo $A | sed 's/arcadmincl/trntnbatchcl/'); mv $A $B; done
+____________________________________________
+Find logs and delete logs older than 5 days
+
+find /<path to logs>/logs/ -mtime +5 -name "*.log" -exec  rm {} \;
+____________________________________________
+Read line by line from a file and action on each line
+while read -r line 
+ do     
+   command ${line} > ${line}.txt 
+done< "file" 
+____________________________________________
+Unzip all zipped files in a folder
+
+for f in *.zip;do unzip "$f";done
+____________________________________________
+Find type of file or directory in a folder
+
+if [ -x /<path to folder> ] then
+
+-f true if it is a regular file
+-x true if it is executable
+-a true if exists
+-d true if directory exists
+____________________________________________
+infinite loop
+
+#!/bin/bash
+for (( ; ; ))
+do
+   echo "infinite loop [ hit CTRL-C to stop ]"
+done
+____________________________________________
+Find and print file list
+
+find . -type f -name '*.*' -print0 | while IFS= read -r -d '' file; do
+    printf '%s\n' "$file"
+done
+____________________________________________
+Change cases
+
+echo {$1^^} to upppercase
+echo {$1,,} to lowercase
+____________________________________________
+Find and delete with exclusions
+
+find . -type f -not -name '*ignore1' -not -name '*ignore2' | xargs rm
+____________________________________________
+Read an array and iterate over each element
+
+IFS=', ' read -r -a array <<< "$string"
+for element in "${array[@]}"
+do
+    echo "$element"
+done
+____________________________________________
+Read an array and access an individual element
+
+IFS=', ' read -r -a array <<< "$string"
+echo "${array[0]}"
+____________________________________________
+Read an array and echo array length
+
+IFS=', ' read -r -a array <<< "$string"
+echo ${#array[@]}
+____________________________________________
+Delete any file older than 14 days
+
+find . -type f -mtime +14 | xargs -i rm {} 
+____________________________________________
+Find old file to archive, in this case older than 7 days.
+
+find /<path to files/logs> -type f -mtime +7 | xargs -i mv {} /<path to backup folder>
+____________________________________________
+Truncate a file
+
+cat /dev/null > file
+or 
+: > /path/to/the/file.log
+____________________________________________
+Find deleted files, not knowing pid
+
+lsof -nP +L1 | grep '(deleted)'
+
++L1 == select unlinked open files on the specified file system
+____________________________________________
+
+
+
