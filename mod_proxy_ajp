@@ -1,0 +1,39 @@
+<IfModule proxy_module>
+ProxyRequests Off
+ProxyPass /examples balancer://mycluster stickysession=JSESSIONID
+ProxyPassReverse /examples balancer://mycluster stickysession=JSESSIONID
+<Proxy balancer://mycluster>
+BalancerMember http://localhost:8080/examples route=server1
+BalancerMember http://localhost:8090/examples route=server2
+</Proxy>
+</IfModule>
+_____________________________________________________________
+<Proxy balancer://mycluster>
+BalancerMember ajp://localhost:9009 timeout=600 route=jvmRoute01
+BalancerMember ajp://localhost:9019 timeout=600 route=jvmRoute02
+BalancerMember ajp://localhost:9029 timeout=600 route=jvmRoute03
+BalancerMember ajp://localhost:9039 timeout=600 route=jvmRoute04
+ProxySet lbmethod=bytraffic
+ProxySet stickysession=JSESSIONID
+</Proxy>
+
+<Location /examples>
+    ProxyPass /examples balancer://mycluster
+</Location>
+
+_____________________________________________________________
+Without load balance
+
+<Location /examples>
+     ProxyPass ajp://localhost:9081/examples
+     ProxyPassReverse ajp://localhost:9081/examples
+</Location>
+
+proxy_ajp needs
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
+LoadModule lbmethod_byrequests_module modules/mod_lbmethod_byrequests.so
+LoadModule lbmethod_bytraffic_module modules/mod_lbmethod_bytraffic.so
+LoadModule lbmethod_bybusyness_module modules/mod_lbmethod_bybusyness.so
+LoadModule slotmem_shm_module modules/mod_slotmem_shm.so
