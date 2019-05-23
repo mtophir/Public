@@ -131,6 +131,9 @@ lsof -nP +L1 | grep '(deleted)'
 
 +L1 == select unlinked open files on the specified file system
 ____________________________________________
+Find and replace text in all files
 
+find . -type f -exec sed -i 's/QY1BYOY876/mriprduser12p/g' {} \;
+find *.sh -type f -exec sed -i 's/CURRENT/current/g' {} \;
 
 
