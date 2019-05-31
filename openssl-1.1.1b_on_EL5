@@ -1,0 +1,3 @@
+Compile openssl-1.1.1b on old kernel (EL5 or Centos 5)
+./config no-asm -g3 -O0 -fno-omit-frame-pointer -fno-inline-functions --prefix=<target>
+make && make install
