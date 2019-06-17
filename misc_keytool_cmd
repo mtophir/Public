@@ -1,0 +1,33 @@
+#Delete a cert from a keystore
+keytool -delete -alias keyAlias -keystore keystore-name -storepass password
+ 
+#Import a cert into a keystore
+keytool -import -alias keyAlias -keystore keystore-name
+ 
+#Generate a Java keystore and key pair
+keytool -genkey -alias keyAlias -keyalg RSA -keysize 2048 -keystore keystore-name
+
+#Generate a certificate signing request (CSR) for an existing Java keystore
+keytool -certreq -alias certAlias -keystore keystore-name -file mydomain.csr
+ 
+#Import a root or intermediate CA certificate to an existing Java keystore
+keytool -import -trustcacerts -alias trustAlias  -file ca.crt -keystore keystore.jks
+
+#Generate a keystore and self-signed certificate
+keytool -genkey -keyalg RSA -alias keyAlias -keystore keystore-name -storepass password -validity 360 -keysize 2048
+
+#Check a stand-alone certificate
+keytool -printcert -v -file cert-filename
+
+#Check which certificates are in a Java keystore
+keytool -list -v -keystore keystore-name
+
+#Check a particular keystore entry using an alias
+keytool -list -v -keystore keystore-name alias keyAlias
+
+#Change a Java keystore password
+keytool -storepasswd -new new_storepasswd keystore keystore-name
+
+#Export a certificate from a keystore
+keytool -export -alias keyAlias -file cert-filename -keystore keystore-name
+
