@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# startup.sh
+# Script to start TomEE applications
+
+export CATALINA_HOME=/apps/ss/tomee/current
+export CATALINA_BASE=/apps/ss/tmbase/trentondomain/trntncl/trntn1
+
+$CATALINA_HOME/bin/catalina.sh start
