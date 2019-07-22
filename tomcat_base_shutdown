@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# shutdown.sh
+# Script to stop ToMee applications
+
+export CATALINA_HOME=/apps/ss/tomee/current
+export CATALINA_BASE=/apps/ss/tmbase/trentondomain/trntncl/trntn1
+
+$CATALINA_HOME/bin/catalina.sh stop 10 -force
