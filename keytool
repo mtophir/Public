@@ -1,0 +1,12 @@
+Delete a cert: keytool -delete -alias keyAlias -keystore keystore-name -storepass password
+Import a cert: keytool -import -alias keyAlias -keystore keystore-name -storepass password
+Export a cert: keytool -export -alias keyAlias -file output-filename -keystore keystore-name -storepass password
+Change a Java keystore password: keytool -storepasswd -new new_storepass -keystore keystore-name
+Check a stand-alone certificate: keytool -printcert -v -file cert-filename (like mydomain.crt)
+Check which certificates are in a Java keystore: keytool -list -v -keystore keystore-name
+Check a particular keystore entry using an alias: keytool -list -v -keystore keystore.name -alias keyAlias
+List Trusted CA Certs: keytool -list -v -keystore <path to >cacerts
+Import New CA into Trusted Certs:  keytool -import -trustcacerts -file /path/to/ca/ca.pem -alias CA_ALIAS -keystore <path to>cacerts
+Generate a Java keystore and key pair: keytool -genkey -alias mydomain -keyalg RSA -keystore keystore.jks -keysize 2048
+Generate a certificate signing request (CSR) for an existing Java keystore: keytool -certreq -alias keyAlias -keystore keystore-name -file csr-filename.csr
+Import a root or intermediate CA certificate to an existing Java keystore: keytool -import -trustcacerts -alias root -file Thawte.crt -keystore keystore-name
