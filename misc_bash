@@ -85,9 +85,10 @@ find . -type f -name '*.*' -print0 | while IFS= read -r -d '' file; do
 done
 ____________________________________________
 Change cases
-
-echo {$1^^} to upppercase
-echo {$1,,} to lowercase
+a='bcdf'
+echo ${a^^} to upppercase
+echo ${a^} to propercase
+echo ${a,,} to lowercase
 ____________________________________________
 Find and delete with exclusions
 
